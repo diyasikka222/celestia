@@ -9,6 +9,7 @@ class CommandHandler:
             "pwd": self.pwd,
             "ls": self.ls,
             "echo": self.echo,
+            "cd": self.cd,
         }
 
     def handle(self, command_input):
@@ -56,4 +57,20 @@ class CommandHandler:
             print("Usage: echo <message>")
         else:
             print(" ".join(args))
-        return True         
+        return True
+
+    def cd(self, args):
+        if not args:
+            print("Usage: cd <directory>")
+            return True
+
+        try:
+            os.chdir(args[0])
+        except FileNotFoundError:
+            print("Directory Not Found")
+        except NotADirectoryError:
+            print("Not a Directory")
+        except PermissionError:
+            print("Permission Denied")
+
+        return True                    
