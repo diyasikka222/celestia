@@ -8,19 +8,21 @@ class CommandHandler:
             "clear": self.clear,
             "pwd": self.pwd,
             "ls": self.ls,
+            "echo": self.echo,
         }
 
     def handle(self, command_input):
         parts = command_input.split()
         command = parts[0].lower()
+        args = parts[1:]
 
         if command in self.commands:
-            return self.commands[command]()
+            return self.commands[command](args)
         else:
             print("Command Not Found! Type 'help' to see available commands.")
             return True
 
-    def help(self):
+    def help(self, args):
         print("""
             Available Commands:
             help - Show Available Commands,
@@ -31,20 +33,27 @@ class CommandHandler:
             """)  
         return True
 
-    def exit(self):
+    def exit(self, args):
         print("Goodbye!")
         return False
 
-    def clear(self):
+    def clear(self, args):
         os.system("clear")
         return True
 
-    def pwd(self):
+    def pwd(self, args):
         print(os.getcwd())
         return True
 
-    def ls(self):
+    def ls(self, args):
         files = os.listdir()
         for file in files:
             print(file)
-        return True     
+        return True    
+
+    def echo(self, args):
+        if not args:
+            print("Usage: echo <message>")
+        else:
+            print(" ".join(args))
+        return True         
