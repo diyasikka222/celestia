@@ -1,4 +1,5 @@
 from command import CommandHandler
+import os
 
 def main():
     print("Welcome to Celestia")
@@ -8,7 +9,9 @@ def main():
 
     while True:
         try:
-            command = input("Celestia > ").strip()
+            # command = input("Celestia > ").strip()
+            current_dir = os.path.basename(os.getcwd())
+            command = input(f"Celestia [{current_dir}] >").strip()
 
             if not command:
                 continue
