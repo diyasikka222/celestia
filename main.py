@@ -1,3 +1,4 @@
+# import readline
 from command import CommandHandler
 import os
 from rich.console import Console
@@ -21,6 +22,9 @@ def main():
             console.print("[bold magenta]Celestia[/bold magenta] ", end="")
             console.print(f"[green]{current_dir}[/green] > ", end="")
             command = input().strip()
+
+            # if command:
+            #     readline.add_history(command)
 
             if not command:
                 continue
